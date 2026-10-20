@@ -1,0 +1,165 @@
+namespace Jaket.World;
+
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
+
+using Jaket.Assets;
+using Jaket.Net;
+
+/// <summary> Tangible actions of multiple types. </summary>
+public static class ActionType
+{
+    #region static
+
+    /// <summary> Creates an action that is performed on scene load. </summary>
+    public static void Run(string scene, Runnable perform) => ActionList.Add(new(scene, null, false, false, perform));
+
+    /// <summary> Creates an actions that places a bunch of torches. </summary>
+    public static void Torches(string scene, Vector3 position) => Run(scene, () =>
+    {
+        GameAssets.Prefab("Levels/Interactive/Altar (Torch) Variant.prefab", p => Events.Post(() => // damn Unity crashes w/o this
+        {
+            for (float angle = Mathf.PI * 12f / 7f; angle > 0f; angle -= Mathf.PI * 2f / 7f)
+            {
+                Inst(p, position + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * 2f, Quaternion.Euler(0f, -angle * 180f / Mathf.PI, 0f))
+                    .GetComponentsInChildren<ItemIdentifier>().Each(i =>
+                    {
+                        if (!LobbyController.IsOwner) Tools.Tools.Dest(i.gameObject);
+                    });
+            }
+        }));
+    });
+
+    /// <summary> Creates an action that finds an object. </summary>
+    public static void Find(string scene, string path, Cons<Transform> perform) => ActionList.Add(new(scene, path, false, false, () =>
+    {
+        ResFind<Transform>().Each(o => IsReal(o) && o.Path() == path, perform);
+    }));
+
+    /// <summary> Creates an action that turns an object on. </summary>
+    public static void Turn(string scene, string path) => Find(scene, path, t => Events.Post(() => t.gameObject.SetActive(true)));
+
+    /// <summary> Creates an action that destroys an object. </summary>
+    public static void Dest(string scene, string path) => Find(scene, path, t => Tools.Tools.Dest(t.gameObject));
+
+    #endregion
+    #region dynamic
+
+    /// <summary> Creates an action that synchronizes an object activator. </summary>
+    public static void Act(string scene, string path, Cons<Transform> perform = null) => ActionList.Add(new(scene, path, true, false, () =>
+    {
+        ResFind<ObjectActivator>().Each(o => IsReal(o) && o.Path() == path, o =>
+        {
+            o.gameObject.SetActive(true);
+            o.Activate();
+            perform?.Invoke(o.transform);
+        });
+    }));
+
+    /// <summary> Creates an action that synchronizes a script activator. </summary>
+    public static void Scr(string scene, string path, Cons<Transform> perform = null) => ActionList.Add(new(scene, path, true, false, () =>
+    {
+        ResFind<ScriptActivator>().Each(o => IsReal(o) && o.Path() == path, o =>
+        {
+            o.pistons.Each(p => p.off = false);
+            o.lightpillars.Each(p => p.ActivatePillar());
+            perform?.Invoke(o.transform);
+        });
+    }));
+
+    /// <summary> Creates an action that synchronizes clicks on a button. </summary>
+    public static void Btn(string scene, string path, Cons<Transform> perform = null) => ActionList.Add(new(scene, path, true, false, () =>
+    {
+        ResFind<Button>().Each(o => IsReal(o) && o.Path() == path, o =>
+        {
+            o.GetComponent<ControllerPointer>().OnPressed.Invoke();
+            o.interactable = false;
+            perform?.Invoke(o.transform);
+        });
+    }));
+
+    /// <summary> Creates an action that finds an object of the given type. </summary>
+    public static void Find<T>(string scene, string path, Cons<T> perform) where T : Component => ActionList.Add(new(scene, path, true, true, pos =>
+    {
+        ResFind<T>().Each(t => IsReal(t) && Mathf.Abs(t.transform.position.x - pos.x) < 0.25f && Mathf.Abs(t.transform.position.z - pos.y) < 0.25f, perform);
+    }));
+
+    /// <summary> Creates an action that synchronizes all windows. </summary>
+    public static void Window(string scene) => Find<Glass>(scene, "window", w =>
+    {
+        if (w.isActiveAndEnabled)
+            w.Shatter();
+        else
+        {
+            w.transform.Each(Imdt);
+            w.enabled = false;
+            w.GetComponents<Collider>().Each(Imdt);
+            w.Component<NavMeshObstacle>(o =>
+            {
+                if (w.wall)
+                {
+                    o.carving = false;
+                    o.enabled = false;
+                }
+                else o.enabled = true;
+            }, true);
+        }
+    });
+
+    /// <summary> Creates an action that synchronizes all statues. </summary>
+    public static void Statue(string scene) => Find<StatueActivator>(scene, "statue", s => s.gameObject.SetActive(true));
+
+    /// <summary> Creates an action that synchronizes all switches. </summary>
+    public static void Switch(string scene) => Find<LimboSwitch>(scene, "switch", s =>
+    {
+        if (s && !s.beenPressed) s.Pressed();
+    });
+
+    /// <summary> Creates an action that synchronizes all breakable objects (walls, crates, etc.). </summary>
+    public static void Breakable(string scene) => Find<Breakable>(scene, "breakable", b =>
+    {
+        if (b && !b.broken) b.ForceBreak();
+    });
+
+    /// <summary> Creates an action that synchronizes all zappables (electric breakers / coils). </summary>
+    public static void Zappable(string scene) => Find<Zappable>(scene, "zappable", z =>
+    {
+        if (z) z.Zap(new System.Collections.Generic.List<GameObject>(), 1f, null);
+    });
+
+    /// <summary> Creates an action that synchronizes door unlocking. </summary>
+    public static void DoorUnlock(string scene) => Find<Door>(scene, "door_unlock", d =>
+    {
+        if (d && d.locked) d.Unlock();
+    });
+
+    /// <summary> Creates an action that synchronizes door opening. </summary>
+    public static void DoorOpen(string scene) => Find<Door>(scene, "door_open", d =>
+    {
+        if (d && !d.open) d.Open(false, false);
+    });
+
+    /// <summary> Creates an action that synchronizes puzzle solutions. </summary>
+    public static void Puzzle(string scene) => Find<PuzzleController>(scene, "puzzle", p =>
+    {
+        if (p) p.Success();
+    });
+
+    /// <summary> Creates an action that synchronizes skull altars and pedestals. </summary>
+    public static void Altar(string scene) => Find<ItemPlaceZone>(scene, "altar", z =>
+    {
+        if (z && !z.acceptedItemPlaced) z.CheckItem();
+    });
+
+    /// <summary> Creates an action that synchronizes all flammables. </summary>
+    public static void Flammable(string scene) => Find<Flammable>(scene, "flammable", f => f.Burn(4f));
+
+    /// <summary> Creates an action that synchronizes all arenas. </summary>
+    public static void Arena(string scene) => Find<ActivateArena>(scene, "arena", a => a.Activate());
+
+    /// <summary> Creates an action that synchronizes all final doors. </summary>
+    public static void Final(string scene) => Find<FinalDoor>(scene, "final", d => { d.Open(); OnLevelStart.Instance.onStart.Invoke(); });
+
+    #endregion
+}

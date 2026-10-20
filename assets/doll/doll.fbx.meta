@@ -1,0 +1,259 @@
+fileFormatVersion: 2
+guid: 9f62bfc06cb4e6b4ea47c47f82881502
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 0
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 0
+    animationRotationError: 0
+    animationPositionError: 0
+    animationScaleError: 0
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: emote-absolute-machine
+      takeName: Metarig|Absolute Machine
+      internalID: -6873238133137190769
+      lastFrame: 23
+      loopTime: 1
+    - serializedVersion: 16
+      name: emote-bow
+      takeName: Metarig|Bow
+      internalID: 1250703801029017042
+      lastFrame: 59
+      loopTime: 0
+    - serializedVersion: 16
+      name: emote-dance
+      takeName: Metarig|Dance
+      internalID: -5847914897542320727
+      lastFrame: 218
+      loopTime: 0
+    - serializedVersion: 16
+      name: doll-dash
+      takeName: Metarig|Dash
+      internalID: 7013284073640473031
+      lastFrame: 13
+      loopTime: 1
+    - serializedVersion: 16
+      name: doll-fall
+      takeName: Metarig|Fall
+      internalID: 920934947348179337
+      lastFrame: 23
+      loopTime: 1
+    - serializedVersion: 16
+      name: doll-idle
+      takeName: Metarig|Idle
+      internalID: 1694128141616201386
+      lastFrame: 23
+      loopTime: 1
+    - serializedVersion: 16
+      name: doll-jump
+      takeName: Metarig|Jump
+      internalID: -5266772329961766744
+      lastFrame: 13
+      loopTime: 0
+    - serializedVersion: 16
+      name: emote-paper
+      takeName: Metarig|Paper
+      internalID: -2905875359256489280
+      lastFrame: 69
+      loopTime: 0
+    - serializedVersion: 16
+      name: doll-parry
+      takeName: Metarig|Parry
+      internalID: -5866522523570320802
+      lastFrame: 21
+      loopTime: 0
+    - serializedVersion: 16
+      name: doll-punch
+      takeName: Metarig|Punch
+      internalID: -7691626799882138099
+      lastFrame: 12
+      loopTime: 0
+    - serializedVersion: 16
+      name: doll-raise
+      takeName: Metarig|Raise
+      internalID: 2976033968769849980
+      lastFrame: 13
+      loopTime: 0
+    - serializedVersion: 16
+      name: doll-ride
+      takeName: Metarig|Ride
+      internalID: -1402878580996894364
+      lastFrame: 23
+      loopTime: 1
+    - serializedVersion: 16
+      name: emote-rock
+      takeName: Metarig|Rock
+      internalID: -7929941199016024591
+      lastFrame: 69
+      loopTime: 0
+    - serializedVersion: 16
+      name: doll-root
+      takeName: Metarig|Root
+      internalID: 5494251300674092608
+      lastFrame: 0
+      loopTime: 0
+    - serializedVersion: 16
+      name: emote-schadenfreude
+      takeName: Metarig|Schadenfreude
+      internalID: -5997418034036114675
+      lastFrame: 79
+      loopTime: 0
+    - serializedVersion: 16
+      name: emote-scissors
+      takeName: Metarig|Scissors
+      internalID: 728137977183072573
+      lastFrame: 69
+      loopTime: 0
+    - serializedVersion: 16
+      name: doll-shopping
+      takeName: Metarig|Shopping
+      internalID: 5289379595600960079
+      lastFrame: 99
+      loopTime: 1
+    - serializedVersion: 16
+      name: emote-skateboard
+      takeName: Metarig|Skateboard
+      internalID: 647100973828287764
+      lastFrame: 164
+      loopTime: 1
+    - serializedVersion: 16
+      name: doll-slide
+      takeName: Metarig|Slide
+      internalID: -3019686998599853237
+      lastFrame: 23
+      loopTime: 1
+    - serializedVersion: 16
+      name: emote-stretch
+      takeName: Metarig|Stretch
+      internalID: -4536694337470928398
+      lastFrame: 113
+      loopTime: 0
+    - serializedVersion: 16
+      name: emote-throne
+      takeName: Metarig|Throne
+      internalID: -6511423334541815955
+      lastFrame: 23
+      loopTime: 1
+    - serializedVersion: 16
+      name: doll-throw
+      takeName: Metarig|Throw
+      internalID: -3191304400034965695
+      lastFrame: 23
+      loopTime: 1
+    - serializedVersion: 16
+      name: emote-tricks
+      takeName: Metarig|Tricks
+      internalID: 7061082534046219323
+      lastFrame: 291
+      loopTime: 0
+    - serializedVersion: 16
+      name: doll-walk
+      takeName: Metarig|Walk
+      internalID: 1693702656368521793
+      lastFrame: 23
+      loopTime: 1
+    - serializedVersion: 16
+      name: emote-waving
+      takeName: Metarig|Waving
+      internalID: -2795141076089166364
+      lastFrame: 44
+      loopTime: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 0
+    importPhysicalCameras: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

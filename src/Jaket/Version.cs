@@ -1,0 +1,87 @@
+namespace Jaket;
+
+using BepInEx.Bootstrap;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine.Networking;
+
+using Jaket.Assets;
+
+/// <summary> Class that handles interactions with the repository of the mod. This includes checking for updates and fetching compatible mods. </summary>
+public static class Version
+{
+    /// <summary> Current version of the project. </summary>
+    public const string CURRENT = "2.1.0";
+    /// <summary> Whether current build is debug. </summary>
+    public const bool DEBUG = false;
+
+    /// <summary> Repository of the project to fetch the data from. </summary>
+    public const string REPO = "grok57629-stack/ultrakill-coop";
+    /// <summary> Json fragments preceding the name and tag of the latest version. </summary>
+    public const string TAG = "\"tag_name\": \"V", NAME = "\"name\": \"";
+    /// <summary> Various access points. </summary>
+    public const string GITHUB_API = "https://api.github.com", GITHUB_RAW = "https://raw.githubusercontent.com";
+
+    /// <summary> Readable version includes beta tag. </summary>
+    public static string Readable => DEBUG ? $"{CURRENT}-beta" : CURRENT;
+    /// <summary> Hash of the current build's commit. </summary>
+    public static string Hash
+    {
+        get
+        {
+            try
+            {
+                var attr = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                if (!string.IsNullOrEmpty(attr) && attr.Length >= 40) return attr[^40..^32];
+            }
+            catch { }
+            return "2.0.0";
+        }
+    }
+
+    /// <summary> List of mods compatible with Jaket. </summary>
+    public static string[] Compatible = { "Jaket" };
+    /// <summary> Whether at least one incompatible mod is loaded. </summary>
+    public static bool HasIncompatibility;
+
+    /// <summary> Fetches data from the given URL address. </summary>
+    public static void Fetch(string url, Cons<string> cons, Cons<long> pst) => UnityWebRequest.Get(url).SendWebRequest().completed += t =>
+    {
+        var r = (t as UnityWebRequestAsyncOperation).webRequest;
+        if (r.responseCode == 200) cons(r.downloadHandler.text);
+        pst(r.responseCode);
+    };
+
+    /// <summary> Fetches the latest version from GitHub and notifies players about it so that they no longer whine to me. </summary>
+    public static void Check4Updates()
+    {
+        Log.Info($"[UPDT] Running Jaket {CURRENT}");
+    }
+
+    /// <summary> Fetches the list of mods that are compatible with Jaket from GitHub. </summary>
+    public static void FetchCompatible()
+    {
+        Log.Info("[UPDT] Fetching the list of compatible mods...");
+        Fetch($"{GITHUB_RAW}/{REPO}/refs/heads/main/compatible-mods.json", res =>
+        {
+            Compatible = new string[res.Count(c => c == '"') / 2];
+
+            for (int i = 0, s = 0, e = 0; i < Compatible.Length; i++)
+            {
+                s = res.IndexOf('"', e + 1) + 1;
+                e = res.IndexOf('"', s);
+
+                Compatible[i] = res[s..e];
+            }
+        }, code =>
+        {
+            List<string> incompatible = new();
+            Chainloader.PluginInfos.Keys.Each(p => Compatible.All(c => c != p), incompatible.Add);
+
+            if (HasIncompatibility = incompatible.Count > 0)
+                Log.Warning($"[UPDT] Incompatible mods found: {string.Join(", ", incompatible)}");
+            else
+                Log.Info("[UPDT] All of the loaded mods are compatible with the project");
+        });
+    }
+}

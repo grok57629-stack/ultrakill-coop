@@ -1,0 +1,22 @@
+// list of mods that are compatible with Jaket
+// only mods that do not change gameplay are supposed to be listed here
+[
+    // mods made by me
+    "xzxADIxzx.Jaket",
+    "xzxADIxzx.CrosshairColorFixer",
+
+    // configs and level loaders
+    "Hydraxous.ULTRAKILL.Configgy",
+    "com.eternalUnion.pluginConfigurator",
+    "com.eternalUnion.angryLevelLoader",
+    "envyandspite.ultrakill.envylevelloader",
+
+    // qol and customization
+    "Hydraxous.ULTRAKILL.Ultracam",
+    "eternalUnion.ultrakill.styleEditor",
+    "dev.flazhik.handpaint",
+    "dev.flazhik.jukebox",
+    "dev.zeddevstuff.ustmanager",
+    "IntroSkip",
+    "Healthbars"
+]

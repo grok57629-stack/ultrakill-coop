@@ -1,0 +1,251 @@
+namespace Jaket.Assets;
+
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+
+/// <summary> Loader that manages the assets of the game. </summary>
+public static class GameAssets
+{
+    #region loading
+
+    /// <summary> Asynchronously loads an asset by the given path. </summary>
+    public static void LoadAsync<T>(string path, Cons<T> cons) { if (path.Contains('.')) Addressables.LoadAssetAsync<T>(path).Task.ContinueWith(t => cons(t.Result)); }
+
+    /// <summary> Loads a prefab by the given path. </summary>
+    public static void Prefab(string path, Cons<GameObject> cons) => LoadAsync(path.StartsWith("p/") ? $"Assets/Particles/{path[2..]}" : $"Assets/Prefabs/{path}", cons);
+
+    /// <summary> Loads a material by the given path. </summary>
+    public static void Material(string path, Cons<Material> cons) => LoadAsync($"Assets/Models/{path}", cons);
+
+    /// <summary> Loads a texture by the given path. </summary>
+    public static void Texture(string path, Cons<Texture> cons) => LoadAsync($"Assets/Models/{path}", cons);
+
+    /// <summary> Loads a shader by the given path. </summary>
+    public static void Shader(string path, Cons<Shader> cons) => LoadAsync($"Assets/Shaders/{path}", cons);
+
+    /// <summary> Loads a sound by the given path. </summary>
+    public static void Sound(string path, Cons<AudioClip> cons) => LoadAsync($"Assets/Sounds/{path}", cons);
+
+    /// <summary> Loads a sprite by the given path. </summary>
+    public static void Sprite(string path, Cons<Sprite> cons) => LoadAsync(path.StartsWith("s/") ? $"Assets/Textures/Sprites/{path[2..]}" : $"Assets/Textures/UI/{path}", cons);
+
+    #endregion
+    #region content
+
+    /// <summary> List of internal paths of all enemies. </summary>
+    public static readonly string[] Enemies =
+    {
+        "Enemies/Filth.prefab",
+        "Enemies/Stray.prefab",
+        "Enemies/Schism.prefab",
+        "Enemies/Soldier.prefab",
+        "Enemies/MinosArm.prefab",
+        "Enemies/MinosBoss.prefab",
+        "Enemies/Stalker.prefab",
+        "Enemies/Sisyphus.prefab",
+        "Enemies/Ferryman.prefab",
+        "Enemies/MirrorReaper.prefab",
+
+        "Enemies/SwordsMachine NonBoss.prefab",
+        "Enemies/Drone.prefab",
+        "Enemies/Streetcleaner.prefab",
+        "Enemies/V2.prefab",
+        "Enemies/Mindflayer.prefab",
+        "Enemies/V2 Green Arm Variant.prefab",
+        "Enemies/Turret.prefab",
+        "Enemies/Gutterman.prefab",
+        "Enemies/Guttertank.prefab",
+        "", // security system
+        "Enemies/CentaurRocketLauncher.prefab",
+        "", // rocket launcher 1st
+        "", // rocket launcher 2nd
+        "Enemies/CentaurMortar.prefab",
+        "", // mortar 1st
+        "", // mortar 2nd
+        "Enemies/CentaurTower.prefab",
+        "", // tower 1st
+        "", // tower 2nd
+        "Enemies/Brain.prefab",
+
+        "Enemies/Malicious Face.prefab",
+        "Enemies/Cerberus.prefab",
+        "Enemies/Mass.prefab",
+        "Enemies/Idol.prefab",
+        "", // leviathan
+        "Enemies/Mannequin.prefab",
+        "Enemies/MinotaurChase.prefab",
+        "Enemies/Minotaur.prefab",
+        "Enemies/Deathcatcher.prefab",
+        "", // garyon
+
+        "Enemies/Gabriel.prefab",
+        "Enemies/Virtue.prefab",
+        "Enemies/Gabriel 2nd.prefab",
+        "Enemies/Providence.prefab",
+        "Enemies/Power.prefab",
+
+        "Enemies/Wicked.prefab",
+        "Enemies/Cancerous Rodent.prefab",
+        "Enemies/Very Cancerous Rodent.prefab",
+        "Enemies/Mandalore.prefab",
+        "Enemies/Big Johninator.prefab",
+        "Enemies/Puppet.prefab",
+
+        "Enemies/Flesh Prison.prefab",
+        "Enemies/Flesh Panopticon.prefab",
+        "Enemies/DroneFlesh.prefab",
+        "Enemies/DroneSkull Variant.prefab",
+        "Enemies/DroneFleshCamera Variant.prefab",
+        "Enemies/MinosPrime.prefab",
+        "Enemies/SisyphusPrime.prefab",
+    };
+
+    /// <summary> List of internal paths of all items. </summary>
+    public static readonly string[] Items =
+    {
+        "Items/SkullBlue.prefab",
+        "Items/SkullRed.prefab",
+        "Items/Soap.prefab",
+        "Items/Torch.prefab",
+        "Items/Torch.prefab",
+        "Items/Florp Throwable.prefab",
+        "Fishing/Apple Bait.prefab",
+        "Fishing/Maurice Bait.prefab",
+
+        "Fishing/Fishes/Funny Fish!!!.prefab",
+        "Fishing/Fishes/pitr fish.prefab",
+        "Fishing/Fishes/Trout.prefab",
+        "Fishing/Fishes/Amid Efil Fish.prefab",
+        "Fishing/Fishes/Dusk Chomper.prefab",
+        "Fishing/Fishes/Bomb Fish.prefab",
+        "Fishing/Fishes/Gib Eyeball Fish.prefab",
+        "Fishing/Fishes/IronLungFish.prefab",
+        "Fishing/Fishes/Dope Fish.prefab",
+        "Fishing/Fishes/Fish Stick.prefab",
+        "Fishing/Fishes/Cooked Fish.prefab",
+        "Fishing/Fishes/Shark Fish.prefab",
+        "Fishing/Fishes/Burnt Stuff.prefab",
+
+        "Items/DevPlushies/DevPlushie (Hakita).prefab",
+        "Items/DevPlushies/DevPlushie (PITR).prefab",
+        "Items/DevPlushies/DevPlushie (Heckteck).prefab",
+        "Items/DevPlushies/DevPlushie (Dawg).prefab",
+        "Items/DevPlushies/DevPlushie (Hazeluff).prefab",
+        "Items/DevPlushies/DevPlushie (CabalCrow) Variant.prefab",
+        "Items/DevPlushies/DevPlushie (Lucas).prefab",
+        "Items/DevPlushies/DevPlushie (Zombie).prefab",
+        "Items/DevPlushies/DevPlushie (Francis).prefab",
+        "Items/DevPlushies/DevPlushie (Jericho).prefab",
+        "Items/DevPlushies/DevPlushie (BigRock).prefab",
+        "Items/DevPlushies/DevPlushie (Mako).prefab",
+        "Items/DevPlushies/DevPlushie (Rhiannon).prefab",
+        "Items/DevPlushies/DevPlushie (FlyingDog).prefab",
+        "Items/DevPlushies/DevPlushie (Sam).prefab",
+        "Items/DevPlushies/DevPlushie (Meganeko).prefab",
+        "Items/DevPlushies/DevPlushie (KGC).prefab",
+        "Items/DevPlushies/DevPlushie (HEALTH - BJ).prefab",
+        "Items/DevPlushies/DevPlushie (HEALTH - Jake).prefab",
+        "Items/DevPlushies/DevPlushie (HEALTH - John).prefab",
+        "Items/DevPlushies/DevPlushie (King Gizzard).prefab",
+        "Items/DevPlushies/DevPlushie (Vylet).prefab",
+        "Items/DevPlushies/DevPlushie (Quetzal).prefab",
+        "Items/DevPlushies/DevPlushie (Gianni).prefab",
+        "Items/DevPlushies/DevPlushie (Weyte).prefab",
+        "Items/DevPlushies/DevPlushie (Lenval).prefab",
+        "Items/DevPlushies/DevPlushie (Kenna).prefab",
+        "Items/DevPlushies/DevPlushie (Joy).prefab",
+        "Items/DevPlushies/DevPlushie (Mandy).prefab",
+        "Items/DevPlushies/DevPlushie (Cameron).prefab",
+        "Items/DevPlushies/DevPlushie (Dalia).prefab",
+        "Items/DevPlushies/DevPlushie (Tucker).prefab",
+        "Items/DevPlushies/DevPlushie (Scott).prefab",
+        "Items/DevPlushies/DevPlushie (Keaton).prefab",
+        "Items/DevPlushies/DevPlushie (Salad).prefab",
+        "Items/DevPlushies/DevPlushie (Jacob).prefab",
+        "Items/DevPlushies/DevPlushie (Vvizard).prefab",
+        "Items/DevPlushies/DevPlushie.prefab",
+    };
+
+    /// <summary> List of readable names of all plushies. </summary>
+    public static readonly string[] Plushies =
+    {
+        "hakita", "pitr", "heckteck", "victoriadawg", "hazeluff", "cabalcrow", "lucas", "zombie", "francis", "jericho", "bigrock", "mako", "rhiannon", "flyingdog", "samuel", "meganeko", "kgc", "benjamin", "jake", "john", "lizard", "vylet", "quetzal", "gianni", "weyte", "lenval", "kenna", "joy", "mandy", "cameron", "dalia", "tucker", "scott", "aaron", "salad", "jacob", "vvizard", "v1", "v2", "v3", "xzxadixzx", "owlnotsowler"
+    };
+
+    /// <summary> List of internal paths of all weapons. </summary>
+    public static readonly string[] Weapons =
+    {
+        "Weapons/Revolver Pierce.prefab",   "Weapons/Alternative Revolver Pierce.prefab",
+        "Weapons/Revolver Ricochet.prefab", "Weapons/Alternative Revolver Ricochet.prefab",
+        "Weapons/Revolver Twirl.prefab",    "Weapons/Alternative Revolver Twirl.prefab",
+
+        "Weapons/Shotgun Grenade.prefab",   "Weapons/Hammer Grenade.prefab",
+        "Weapons/Shotgun Pump.prefab",      "Weapons/Hammer Pump.prefab",
+        "Weapons/Shotgun Saw.prefab",       "Weapons/Hammer Saw.prefab",
+
+        "Weapons/Nailgun Magnet.prefab",    "Weapons/Sawblade Launcher Magnet.prefab",
+        "Weapons/Nailgun Overheat.prefab",  "Weapons/Sawblade Launcher Overheat.prefab",
+        "Weapons/Nailgun Zapper.prefab",    "Weapons/Sawblade Launcher Zapper.prefab",
+
+        "Weapons/Railcannon Electric.prefab",
+        "Weapons/Railcannon Harpoon.prefab",
+        "Weapons/Railcannon Malicious.prefab",
+
+        "Weapons/Rocket Launcher Freeze.prefab",
+        "Weapons/Rocket Launcher Cannonball.prefab",
+        "Weapons/Rocket Launcher Napalm.prefab",
+    };
+
+    /// <summary> List of internal paths of all hitscans. </summary>
+    public static readonly string[] Hitscans =
+    {
+        "Attacks and Projectiles/Hitscan Beams/Revolver Beam.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Revolver Beam Super.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Revolver Beam Sharp.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Revolver Beam Alternative.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Revolver Beam Super Alternative.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Revolver Beam Sharp Alternative.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Railcannon Beam.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Railcannon Beam Malicious.prefab",
+        "p/ReflectedBeamPoint.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Malicious Beam.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Turret Beam.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Gutterman Beam.prefab",
+        "Attacks and Projectiles/Hitscan Beams/Grenade Beam.prefab",
+    };
+
+    /// <summary> List of internal paths of all projectiles. </summary>
+    public static readonly string[] Projectiles =
+    {
+        "Attacks and Projectiles/Shotgun Projectile.prefab",
+        "Attacks and Projectiles/Grenade.prefab",
+        "Attacks and Projectiles/Nails/Nail.prefab",
+        "Attacks and Projectiles/Nails/NailFodder.prefab",
+        "Attacks and Projectiles/Nails/NailHeated.prefab",
+        "Attacks and Projectiles/NailAlt.prefab",
+        "Attacks and Projectiles/NailAltFodder.prefab",
+        "Attacks and Projectiles/NailAltHeated.prefab",
+        "Attacks and Projectiles/Harpoon.prefab",
+        "Attacks and Projectiles/Harpoon Malicious.prefab",
+        "Attacks and Projectiles/Rocket.prefab",
+        "Attacks and Projectiles/Cannonball.prefab",
+        "Attacks and Projectiles/Projectile.prefab",
+        "Attacks and Projectiles/Projectile Beamable.prefab",
+        "Attacks and Projectiles/Projectile Explosive.prefab",
+    };
+
+    /// <summary> List of internal paths of all explosions. </summary>
+    public static readonly string[] Explosions =
+    {
+        "Attacks and Projectiles/PhysicalShockwavePlayer.prefab",
+        "Attacks and Projectiles/Explosions/Explosion Wave.prefab",
+        "Attacks and Projectiles/Explosions/Explosion.prefab",
+        "Attacks and Projectiles/Explosions/Explosion Hammer Weak.prefab",
+        "Attacks and Projectiles/Explosions/Explosion Super.prefab",
+        "p/HammerHitLight.prefab",
+        "p/HammerHitMedium.prefab",
+        "p/HammerHitHeavy.prefab",
+    };
+
+    #endregion
+}
