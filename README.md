@@ -19,6 +19,16 @@
 
 ---
 
+> [!IMPORTANT]
+> **Уведомление об авторстве / Authorship Disclaimer:**  
+> 🇷🇺 **Оригинальным создателем и автором мода Jaket является [xzxADIxzx](https://github.com/xzxADIxzx)** ([оригинальный репозиторий](https://github.com/xzxADIxzx/Join-and-kill-em-together)).  
+> **Я ни в коем случае не присваиваю себе авторство оригинального проекта.** Это сообщественная доработка (Enhanced Fork), созданная исключительно с целью развить мод: добавить полную поддержку Актов 1–3 (Layer 7 Violence), общую синхронизацию мира (стены, рубильники, щитки, черепа), ВХ-метки союзников, выбор цветов шасси робота и исправить баги рассинхрона. Все лавры за создание мультиплеера принадлежат оригинальному автору!  
+>  
+> 🇬🇧 **The original creator and author of the Jaket mod is [xzxADIxzx](https://github.com/xzxADIxzx)** ([original repo](https://github.com/xzxADIxzx/Join-and-kill-em-together)).  
+> **I do NOT claim original authorship of the mod.** This repository is an enhanced community fork created solely to build upon their foundation — adding full Act 1-3 sync, breakable/breaker world synchronization, custom chassis colors, wallhack nametags, and bug fixes for the community.
+
+---
+
 ## 🌐 Выберите язык / Select Language
 - 🇷🇺 [**Русская версия (Russian Documentation)**](#-русская-версия)
 - 🇬🇧 [**English Version (English Documentation)**](#-english-version)
@@ -30,7 +40,7 @@
 ## 📖 Описание
 **ULTRAKILL Co-op Enhanced** — модификация для ULTRAKILL, превращающая одиночный ультранасильственный шутер в полноценный кооперативный экшен для компании от 2 до 16 игроков. 
 
-Эта версия включает расширенную поддержку всей сюжетной кампании (включая Слой 7 «Насилие»), синхронизацию разрушаемых стен, электрощитков, дверей и головоломок, встроенные ВХ-никнеймы сквозь стены и выбор цвета корпуса для каждого игрока.
+Оригинальный мод был разработан **[xzxADIxzx](https://github.com/xzxADIxzx)**. Данная доработка расширяет его возможности: добавляет поддержку всех глав (включая Слой 7 «Насилие»), синхронизацию разрушаемых стен, электрощитков, дверей и головоломок, встроенные ВХ-никнеймы сквозь стены и выбор цвета корпуса для каждого игрока.
 
 ---
 
@@ -126,6 +136,14 @@ dotnet build -c Release
 Готовая библиотека будет собрана в `bin/Release/netstandard2.1/Jaket.dll`.
 
 ---
+
+## 📜 Благодарности и лицензия
+- 👑 **Оригинальный автор мода:** **[xzxADIxzx](https://github.com/xzxADIxzx)** — создатель [Jaket (Join-and-kill-em-together)](https://github.com/xzxADIxzx/Join-and-kill-em-together). Огромное спасибо за великолепный мод и основу сетевого кода!
+- 🛠️ **Доработка и улучшения (Enhanced Edition):** [grok57629-stack](https://github.com/grok57629-stack).
+- 💬 **Дискорд оригинального проекта:** [Jaket Discord Server](https://discord.gg/USpt3hCBgn)
+- ⚖️ **Лицензия:** Проект распространяется под свободной лицензией **GNU General Public License v3.0** (GPL-3.0). Подробнее в файле [LICENSE](LICENSE).
+
+---
 <br>
 
 # 🇬🇧 English Version
@@ -133,7 +151,7 @@ dotnet build -c Release
 ## 📖 Overview
 **ULTRAKILL Co-op Enhanced** brings full-fledged cooperative multiplayer to ULTRAKILL for 2 to 16 players. Experience the breakneck speed and ultra-violence of Hell alongside your friends.
 
-This enhanced edition adds complete Act I–III campaign support (including Layer 7 Violence), synchronized world objects (breakables, breakers, switches, puzzles), wallhack nametags, and player chassis recoloring.
+The original project was created by **[xzxADIxzx](https://github.com/xzxADIxzx)**. This enhanced edition is a community fork that adds complete Act I–III campaign support (including Layer 7 Violence), synchronized world objects (breakables, breakers, switches, puzzles), wallhack nametags, and player chassis recoloring.
 
 ---
 
@@ -221,6 +239,7 @@ The compiled binary will be placed at `bin/Release/netstandard2.1/Jaket.dll`.
 ---
 
 ## 📜 Credits & License
-- Originally based on **Jaket** by [xzxADIxzx](https://github.com/xzxADIxzx/Join-and-kill-em-together).
-- Enhanced & Maintained by [grok57629-stack](https://github.com/grok57629-stack).
-- Licensed under the **GNU General Public License v3.0** (GPL-3.0). See [LICENSE](LICENSE) for details.
+- 👑 **Original Mod Author:** **[xzxADIxzx](https://github.com/xzxADIxzx)** — creator of [Jaket (Join-and-kill-em-together)](https://github.com/xzxADIxzx/Join-and-kill-em-together). Huge respect and appreciation for the original multiplayer mod!
+- 🛠️ **Enhanced Edition & Modifications:** [grok57629-stack](https://github.com/grok57629-stack).
+- 💬 **Original Discord Server:** [Jaket Discord](https://discord.gg/USpt3hCBgn)
+- ⚖️ **License:** Licensed under the **GNU General Public License v3.0** (GPL-3.0). See [LICENSE](LICENSE) for details.
