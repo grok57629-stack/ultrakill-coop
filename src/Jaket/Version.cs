@@ -40,7 +40,7 @@ public static class Version
     }
 
     /// <summary> List of mods compatible with Jaket. </summary>
-    public static string[] Compatible = { "Jaket" };
+    public static string[] Compatible = { "Jaket", "xzxADIxzx.Jaket" };
     /// <summary> Whether at least one incompatible mod is loaded. </summary>
     public static bool HasIncompatibility;
 

@@ -65,13 +65,13 @@ public class World
     #region data
 
     /// <summary> Number of bytes that the world data takes in a snapshot. </summary>
-    public static int BufferSize => 4 + (Pending ?? Scene).Length + Version.Readable.Length + performed.Count(b => b) * 2 + pos.Count(p => p != default) * 8;
+    public static int BufferSize => 4 + (Pending ?? Scene).Length + 5 + performed.Count(b => b) * 2 + pos.Count(p => p != default) * 8;
 
     /// <summary> Writes the world data into a snapshot. </summary>
     public static void WriteData(Writer w)
     {
         w.String(Pending ?? Scene);
-        w.String(Version.Readable);
+        w.String("2.0.0"); // Keep network protocol handshake as "2.0.0" so 2.0.0 clients don't disconnect!
 
         w.Byte((byte)PrefsManager.Instance.GetInt("difficulty"));
         w.Byte((byte)performed.Count(b => b));
@@ -93,23 +93,19 @@ public class World
         LoadScn(r.String());
         Reset();
 
-        if (r.String() != Version.Readable)
-        {
-            LobbyController.LeaveLobby();
-            Log.Info("[LOBY] Left the lobby as the owner is outdated");
-        }
-        else
-        {
-            PrefsManager.Instance.SetInt("difficulty", r.Byte());
+        var hostVersion = r.String();
+        Log.Info($"[LOBY] Level loaded from host (host version: {hostVersion}, local: {Version.Readable})");
 
-            for (int w = r.Byte(); w > 0; w--)
-            {
-                byte i = r.Byte();
-                byte k = r.Byte();
+        // Never disconnect on version mismatch: allow all 2.0.x and 2.1.x versions to play together!
+        PrefsManager.Instance.SetInt("difficulty", r.Byte());
 
-                performed[i] = true;
-                for (int j = 0; j < k; j++) pos[POOL * i + j] = new(r.Float(), r.Float());
-            }
+        for (int w = r.Byte(); w > 0; w--)
+        {
+            byte i = r.Byte();
+            byte k = r.Byte();
+
+            performed[i] = true;
+            for (int j = 0; j < k; j++) pos[POOL * i + j] = new(r.Float(), r.Float());
         }
     }
 

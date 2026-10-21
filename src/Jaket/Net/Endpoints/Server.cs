@@ -71,7 +71,7 @@ public class Server : Endpoint, ISocketManager
 
         Listen(PacketType.Style, (con, sender, r, s) =>
         {
-            if (ents[sender] is RemotePlayer p && Redirect(ref r, s, con, sender)) p.Doll.ReadSuit(r, s - 9);
+            if (ents[sender] is RemotePlayer p && Redirect(ref r, s, con, sender)) p.Doll.ReadSuit(r, s - 5);
         });
 
         Listen(PacketType.Punch, (con, sender, r, s) =>

@@ -233,11 +233,15 @@ public class Doll
         Hat = r.Int();
         Jacket = r.Int();
 
-        if (left >= 13)
-            SkinColor = r.Color();
-
         CustomColors = r.Bool();
         if (CustomColors) { Color1 = r.Color(); Color2 = r.Color(); Color3 = r.Color(); }
+
+        // Backwards-compatible: only read SkinColor if appended at the end of the packet
+        int expectedBase = CustomColors ? 21 : 9;
+        if (left >= expectedBase + 4)
+        {
+            SkinColor = r.Color();
+        }
 
         ApplySuit();
     }

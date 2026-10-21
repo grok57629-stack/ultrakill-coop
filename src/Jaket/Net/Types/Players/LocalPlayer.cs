@@ -141,8 +141,6 @@ public class LocalPlayer : Entity
             w.Int(Shop.SelectedHat);
             w.Int(Shop.SelectedJacket);
 
-            w.Color(SkinColors.CurrentColor);
-
             w.Bool(custom);
             if (custom) renderer.Properties(b =>
             {
@@ -150,6 +148,9 @@ public class LocalPlayer : Entity
                 w.Color(b.GetColor("_CustomColor2"));
                 w.Color(b.GetColor("_CustomColor3"));
             });
+
+            // Appended at the end for 100% backwards compatibility with original 2.0.0 clients!
+            w.Color(SkinColors.CurrentColor);
         });
     }
 

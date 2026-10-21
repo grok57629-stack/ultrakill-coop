@@ -53,7 +53,7 @@ public class Client : Endpoint, IConnectionManager
 
         Listen(PacketType.Style, (con, sender, r, s) =>
         {
-            if (ents[r.Id()] is RemotePlayer p) p.Doll.ReadSuit(r, s - 9);
+            if (ents[r.Id()] is RemotePlayer p) p.Doll.ReadSuit(r, s - 5);
         });
 
         Listen(PacketType.Punch, r =>
@@ -98,9 +98,13 @@ public class Client : Endpoint, IConnectionManager
 
     public override void Update()
     {
-        Stats.MeasureTime(ref Stats.ReadMs, () => Manager.Receive());
+        if (Manager == null) return;
+
+        Stats.MeasureTime(ref Stats.ReadMs, () => Manager?.Receive());
         Stats.MeasureTime(ref Stats.WriteMs, () =>
         {
+            if (Manager == null || Networking.LocalPlayer == null) return;
+
             // Always send LocalPlayer every tick for smooth movement
             Networking.Send(PacketType.Snapshot, Networking.LocalPlayer.BufferSize, w =>
             {
@@ -125,7 +129,7 @@ public class Client : Endpoint, IConnectionManager
         });
         Stats.MeasureTime(ref Stats.FlushMs, () =>
         {
-            Manager.Connection.Flush();
+            if (Manager != null) Manager.Connection.Flush();
             Pointers.Free();
         });
     }
@@ -150,7 +154,10 @@ public class Client : Endpoint, IConnectionManager
 
     public void OnDisconnected(ConnectionInfo info) => Log.Info("[CLIENT] Disconnected");
 
-    public void OnMessage(Ptr data, int size, long msg, long time, int channel) => Handle(Manager.Connection, 0u, data, size);
+    public void OnMessage(Ptr data, int size, long msg, long time, int channel)
+    {
+        if (Manager != null) Handle(Manager.Connection, 0u, data, size);
+    }
 
     #endregion
 }
