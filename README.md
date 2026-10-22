@@ -87,16 +87,20 @@
 
 ## 📥 Быстрая установка
 
-### Способ 1: Готовая установка (Рекомендуется)
-1. Перейдите во вкладку [**Releases**](https://github.com/grok57629-stack/ultrakill-coop/releases/latest) и скачайте архив `ULTRAKILL-Coop-Mod.zip`.
-2. Распакуйте содержимое архива в папку с игрой ULTRAKILL:
-   - Путь Steam по умолчанию:  
-     `C:\Program Files (x86)\Steam\steamapps\common\ULTRAKILL\`
-3. Убедитесь, что файл `Jaket.dll` находится по пути:  
-   `.../ULTRAKILL/BepInEx/plugins/Jaket/Jaket.dll`
-4. Запустите игру.
+### 🚀 Способ 1: Автоустановщик в 1 клик (Рекомендуется)
+1. Скачайте архив `ULTRAKILL-Coop-Mod.zip` из вкладки [**Releases**](https://github.com/grok57629-stack/ultrakill-coop/releases/latest).
+2. Распакуйте архив в любое удобное место и запустите файл **`Установить Мод (Install).bat`**.
+3. Программа **автоматически**:
+   - Найдёт путь к игре ULTRAKILL на компьютере (Steam библиотеки на любых дисках).
+   - Обнаружит и чисто заменит старую версию мода на новую.
+   - Установит свежую версию v2.1.0 и все необходимые компоненты BepInEx.
+4. Запустите игру и нажмите клавишу **`F1`**!
 
-### Способ 2: Через Mod Manager (r2modman)
+### 📁 Способ 2: Ручная установка
+1. Распакуйте содержимое архива прямо в корневую папку с игрой ULTRAKILL (где лежит `ULTRAKILL.exe`).
+2. При появлении запроса подтвердите замену файлов.
+
+### Способ 3: Через Mod Manager (r2modman)
 1. Установите [r2modman](https://github.com/ebkr/r2modmanPlus).
 2. Выберите ULTRAKILL и создайте профиль.
 3. Установите BepInExPack.
@@ -196,18 +200,22 @@ The original project was created by **[xzxADIxzx](https://github.com/xzxADIxzx)*
 
 ---
 
-## 📥 Quick Installation
+## 📥 Installation
 
-### Option 1: Standalone Package (Recommended)
-1. Download `ULTRAKILL-Coop-Mod.zip` from the latest [**Releases**](https://github.com/grok57629-stack/ultrakill-coop/releases/latest).
-2. Extract the archive into your ULTRAKILL game directory:
-   - Steam default path:  
-     `C:\Program Files (x86)\Steam\steamapps\common\ULTRAKILL\`
-3. Verify that `Jaket.dll` is located at:  
-   `.../ULTRAKILL/BepInEx/plugins/Jaket/Jaket.dll`
-4. Launch the game and press `F1`.
+### 🚀 Option 1: 1-Click Auto-Installer (Recommended)
+1. Download `ULTRAKILL-Coop-Mod.zip` from [**Releases**](https://github.com/grok57629-stack/ultrakill-coop/releases/latest).
+2. Extract the archive anywhere and run **`Установить Мод (Install).bat`**.
+3. The installer will **automatically**:
+   - Locate your ULTRAKILL game directory across all Steam libraries and drives.
+   - Detect and cleanly replace any old/outdated versions of the mod.
+   - Install the latest v2.1.0 files and necessary BepInEx framework files.
+4. Launch the game and press **`F1`**!
 
-### Option 2: Using Mod Manager (r2modman)
+### 📁 Option 2: Manual Installation
+1. Extract the contents of the archive directly into your ULTRAKILL game root folder (where `ULTRAKILL.exe` is located).
+2. Confirm replacing files if prompted.
+
+### Option 3: Using Mod Manager (r2modman)
 1. Install [r2modman](https://github.com/ebkr/r2modmanPlus).
 2. Select ULTRAKILL and install BepInExPack.
 3. Import or place `Jaket.dll` and the `assets` folder into your profile plugins directory.
